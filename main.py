@@ -61,17 +61,18 @@ def load_data(res):
 	## clustering data for colors
 	# divide data to 10 parts
 	infected.sort()
+	print(infected)
 	n=len(infected)//10
 	checkpt=[]
 	for i in range(10):
-		checkpt.append(infected[(i+1)*n])
+		checkpt.append(infected[(i)*n])
 	print('fixing check points as ',checkpt)
 
 # Adding colors
 def colorPicker(val):
 	# cluster the data into 10 parts based on frequency
 	global checkpt
-	cmap = matplotlib.cm.get_cmap('Blues')
+	cmap = matplotlib.cm.get_cmap('Reds')
 	values=[0.2,0.3,0.4,0.5,0.6,0.65,0.7,0.8,0.9]
 	for no in range(9):
 		if (checkpt[no]>=val):
@@ -99,10 +100,11 @@ for info,shape in zip(map.INDIA_info, map.INDIA):
 	if (info['NAME_2'] in data):
 		#patchs.append(Polygon(np.array(shape), True))
 		ax.add_collection(PatchCollection([Polygon(np.array(shape))], facecolor= colorPicker(data[info['NAME_2']]['infected']), edgecolor='k', linewidths=.3, zorder=2))
+		#ax.add_collection(PatchCollection([Polygon(np.array(shape))], facecolor= '#ffffff' , edgecolor='k', linewidths=.2, zorder=2))
 	else:
 		ax.add_collection(PatchCollection([Polygon(np.array(shape))], facecolor= '#ffffff' , edgecolor='k', linewidths=.2, zorder=2))
+		#ax.add_collection(PatchCollection([Polygon(np.array(shape))], facecolor= (0,1,0,1) , edgecolor='k', linewidths=.2, zorder=2))
 
 
-plt.title('Corona cases')
+plt.title('Corona Effected Districts')
 plt.show()
-#6200ff
